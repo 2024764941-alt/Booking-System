@@ -16,7 +16,7 @@
   </properties>
 
   <dependencies>
-    <!-- Jakarta Servlet API -->
+    <!-- Jakarta Servlet API (Tomcat 10 compatible) -->
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
@@ -33,7 +33,7 @@
       <version>42.7.2</version>
     </dependency>
 
-    <!-- JSP API (Missing Dependency fix) -->
+    <!-- JSP API (Tomcat 10 compatible) -->
     <dependency>
         <groupId>jakarta.servlet.jsp</groupId>
         <artifactId>jakarta.servlet.jsp-api</artifactId>
@@ -66,6 +66,27 @@
             <exclude>**/test/**</exclude>
           </excludes>
         </configuration>
+      </plugin>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>3.1.2</version>
+          <executions>
+              <execution>
+                  <phase>package</phase>
+                  <goals><goal>copy</goal></goals>
+                  <configuration>
+                      <artifactItems>
+                          <artifactItem>
+                              <groupId>com.heroku</groupId>
+                              <artifactId>webapp-runner</artifactId>
+                              <version>10.1.19.0</version>
+                              <destFileName>webapp-runner.jar</destFileName>
+                          </artifactItem>
+                      </artifactItems>
+                  </configuration>
+              </execution>
+          </executions>
       </plugin>
     </plugins>
   </build>
