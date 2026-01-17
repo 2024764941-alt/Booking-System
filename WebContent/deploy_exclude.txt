@@ -1,0 +1,6 @@
+compile.bat
+deploy.bat
+run_server.bat
+.git
+.vscode
+src
